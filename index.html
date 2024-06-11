@@ -17,34 +17,46 @@
 
   <div class="content-container">
     <div class="calendar-container">
-
-      <div class="row">
+   <div class="row">
         <p class="date-label" id="day-label">DAY</p>
         <p class="date-label" id="month-label">MONTH</p>
         <p class="date-label" id="year-label">YEAR</p>
       </div>
 
       <div class="row">
+        
         <button class="date-button" id="day-button">24</button>
-        <button class="date-button" id="month-button">09</button>
-        <button class="date-button" id="year-button">1984</button>
-      </div>
+          <!-- <div class="dropdown" id="dropdown-day">
+            <input type="text" id="day-button-input">          
+          </div> -->
 
+        <button class="date-button" id="month-button">09</button>
+        <!-- <div class="dropdown" id="dropdown-month"></div>
+          <input type="text" id="month-button-input">          
+        </div> -->
+
+        <button class="date-button" id="year-button">1984</button>
+        <!-- <div class="dropdown" id="dropdown-year">
+          <input type="text" id="year-button-input">          
+        </div> -->
+
+      </div>
+      <hr>
+        
       <div class="image-container">
-        <hr>  
+        
         <img class="arrow-image" src="../assets/images/icon-arrow.svg" alt="Arrow Image" height="25px" width="25px"></img>
       </div>
 
     </div>
+   
     
     
-    
-
     <div class="output-content">      
 
-      <p id="output-years"> -- years </p>
-      <p id="output-months"> -- months </p>        
-      <p id="output-days"> -- days </p>
+      <p id="output-years"> years </p>
+      <p id="output-months"> months </p>        
+      <p id="output-days"> days </p>
 
     </div>
 
