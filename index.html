@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="./styles/index.css">
+  <script src="/scripts/index.js"></script>
   
   <title>Frontend Mentor | Age calculator app</title>
 
@@ -12,31 +14,45 @@
 
 </head>
 <body>
-  
+
   <div class="content-container">
-    <div class="date-container">
-      <p class="date" id="day-para">          DAY</p>
-      <button id="day" class="day-button">    24</button>
-      <p class="date" id="month-para">        MONTH</p>
-      <button id="month" class="month-button">09</button>
-      <p class="date" id="year-para">         YEAR</p>
-      <button id="year" class="year-button">  1984</button>
-      <hr>
+    <div class="calendar-container">
+
+      <div class="row">
+        <p class="date-label" id="day-label">DAY</p>
+        <p class="date-label" id="month-label">MONTH</p>
+        <p class="date-label" id="year-label">YEAR</p>
+      </div>
+
+      <div class="row">
+        <button class="date-button" id="day-button">24</button>
+        <button class="date-button" id="month-button">09</button>
+        <button class="date-button" id="year-button">1984</button>
+      </div>
+
+      <div class="image-container">
+        <hr>  
+        <img class="arrow-image" src="../assets/images/icon-arrow.svg" alt="Arrow Image" height="25px" width="25px"></img>
+      </div>
+
+    </div>
+    
+    
+    
+
+    <div class="output-content">      
+
+      <p id="output-years"> -- years </p>
+      <p id="output-months"> -- months </p>        
+      <p id="output-days"> -- days </p>
+
     </div>
 
-    <div class="output-content">
-      <p id="output-years"> -- years</p>
-      <p id="output-months">-- months</p>        
-      <p id="output-days">  -- days</p>
-    </div>
+  </div>
 
-</div>
-
-  
-  
-  <div class="attribution">
+  <!-- <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
-  </div>
+  </div> -->
 </body>
 </html>

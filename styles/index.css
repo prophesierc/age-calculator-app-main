@@ -1,5 +1,111 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('../assets/fonts/Poppins-Regular.ttf');
+}
 
+:root {
+    /* colors */
+    --primary-clr-purple: hsl(259, 100%, 65%);
+    --primary-clr-light-red: hsl(0, 100%, 67%);
 
+    --neutral-clr-White: hsl(0, 0%, 100%);
+    --neutral-clr-off-white: hsl(0, 0%, 94%);
+    --neutral-clr-light-grey: hsl(0, 0%, 86%);
+    --neutral-clr-smokey-grey: hsl(0, 1%, 44%);
+    --neutral-clr-off-black: hsl(0, 0%, 8%);
+
+    /* Font */
+    --ff-Poppins: 'Poppins';
+    --fs-inputs: 32px;
+    --fw-regular: 400;
+    --fw-bold: 700;
+    --fw-extra-bold: 800;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {    
+    background-color: var(--neutral-clr-off-white);
+    height: 70vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+}
+.content-container { 
+    background-color: var(--neutral-clr-White);   
+    font-family: var(--ff-Poppins);
+    height: 50vh;
+    width: 90vw;    
+    border-radius: 1em 1em 5em 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.calendar-container {
+    margin-top: 3em;
+    padding-bottom: 10em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+.row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 1em;
+    
+}
+.date-label {
+    font-weight: var(--fw-bold);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--neutral-clr-smokey-grey);
+    margin: .5em 1em .5em 0;
+}
+.date-button {
+    justify-content: center;
+    align-items: center;
+    background-color: var(--neutral-clr-White);
+    border: 1px solid var(--neutral-clr-light-grey);
+    border-radius: 8px;
+    width: 5em;    
+    height: 3em;
+    font-size: 20px;
+    font-weight: var(--fw-extra-bold);
+    margin-bottom: 1.5em;
+}
+.image-container{
+    background-color: var(--primary-clr-purple);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.image-container hr {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px; /* Adjust width of the hr */
+    height: 2px; /* Adjust height of the hr */
+    background-color: var(--neutral-clr-off-white); /* Adjust color of the hr */
+    z-index: 0; /* Ensure hr appears below the image */
+}
+#day-label {}
+#month-label {}
+#year-label {}
+#day-button {}
+#month-button {}
+#year-button {}
 
 .attribution { 
     font-size: 11px; 
