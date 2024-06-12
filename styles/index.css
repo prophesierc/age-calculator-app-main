@@ -60,20 +60,24 @@ body {
 }
 .row {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
-    gap: 1em;
+    gap: .8em;
+    justify-content: center;
+    align-items: center;
 }
-.date-label {
+
+.date-label {    
     font-weight: var(--fw-bold);
     font-size: 12px;
     letter-spacing: 2px;
-    color: var(--neutral-clr-smokey-grey);
-    margin: .5em 1em .5em 0;
+    color: var(--neutral-clr-smokey-grey);           
+    text-wrap: nowrap;
 }
-.date-button{
-    justify-content: center;
-    align-items: center;
+
+.date-button {    
+    display: flex;    
+    text-align: center;
     background-color: var(--neutral-clr-White);
     border: 1px solid var(--neutral-clr-light-grey);
     border-radius: 8px;
@@ -81,12 +85,24 @@ body {
     height: 3em;
     font-size: 20px;
     font-weight: var(--fw-extra-bold);
-    font-family: var(--ff-Poppins);
+    font-family: var(--ff-Poppins);        
+  }
+.dropdown a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-
-.dropdown, #day-button-input, #month-button-input, #year-button-input {
+.day-toggle{
     display: none;
 }
+.month-toggle{
+    display: none;
+}
+.year-toggle{
+    display: none;
+}
+
 .image-container{
     background-color: var(--primary-clr-purple);
     border-radius: 50%;

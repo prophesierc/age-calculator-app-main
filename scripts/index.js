@@ -1,20 +1,18 @@
-class Calendar
+class Calendar 
 {
-    constructor()
+    constructor() 
     {
-        this.buttonClass = document.getElementsByTagName('button');
-        this.dayButtonId = document.getElementById('day-button');
-        this.dayButton = this.buttonClass[0];
-        this.monthButton = this.buttonClass[1];
-        this.yearButton = this.buttonClass[2];
-        // console.log(this.buttonClass);
+        this.dayDropdown = document.getElementById("day-dropdown").classList.toggle("day-toggle");
+        this.monthDropdown = document.getElementById("month-dropdown").classList.toggle("month-toggle");
+        this.yearDropdown = document.getElementById("year-dropdown").classList.toggle("year-toggle");
+
     }
 
-    inputSelector()
+    myFunction() 
     {
         
     }
 }
 
 let calendar = new Calendar();
-calendar.inputSelector();
+calendar.myFunction();
