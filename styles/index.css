@@ -33,7 +33,7 @@
 }
 body {    
     background-color: var(--neutral-clr-off-white);
-    height: 80vh;
+    height: 90vh;
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -43,7 +43,7 @@ body {
 .content-container { 
     background-color: var(--neutral-clr-White);   
     font-family: var(--ff-Poppins);
-    height: 60vh;
+    height: 70vh;
     width: 90vw;    
     border-radius: 1em 1em 5em 1em;
     display: flex;
@@ -74,8 +74,7 @@ body {
     color: var(--neutral-clr-smokey-grey);           
     text-wrap: nowrap;
 }
-
-.date-button {    
+.date-input {    
     display: flex;    
     text-align: center;
     background-color: var(--neutral-clr-White);
@@ -91,18 +90,22 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center;   
+    text-decoration: none;
+    overflow-y: auto;    /*will need to add scroll for over flow of text added by js */
+    
 }
-.day-toggle{
+.dropdown{
+    margin-top: .5em;
+    width: 6.2em;
+    background-color: var(--neutral-clr-off-white);
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+}
+.day-toggle, .month-toggle, .year-toggle{
     display: none;
 }
-.month-toggle{
-    display: none;
-}
-.year-toggle{
-    display: none;
-}
-
 .image-container{
     background-color: var(--primary-clr-purple);
     border-radius: 50%;
@@ -124,11 +127,10 @@ hr{
     font-family: var(--ff-Poppins-Extra-Bold-Italic);
     font-size: var(--fs-inputs);
     font-weight: var(--fw-extra-bold);
-    position: relative;
+    line-height: 1.2em;
     display: flex;
     flex-direction: column;
-    bottom: 2.5em;
-    margin-right: 2em;
+    margin: 1.5em 1.8em 0 0;
 }
 
 #output-years::before{
