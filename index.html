@@ -17,34 +17,25 @@
 
         <div id="input-container-day" class="input-container">    
           <label for="day-button-input" class="date-label" id="day-label">DAY</label>                          
-          <input type="number" placeholder="DD" class="date-input" id="day-button-input" autocomplete="off" minlength="2" maxlength="2">     
+          <input type="number" placeholder="DD" class="date-input" id="day-button-input" autocomplete="off" minlength="2" maxlength="2" min="0" max="31">     
           <div class="dropdown" id="day-dropdown">      
-            <a href="#about">About</a>
-            <a href="#base">Base</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>      
+            
           </div>
         </div>
 
         <div id="input-container-month" class="input-container">    
           <label for="month-button-input" class="date-label" id="month-label">MONTH</label>             
-          <input type="number" placeholder="MM" class="date-input" id="month-button-input" autocomplete="off" minlength="2" maxlength="2">       
+          <input type="number" placeholder="MM" class="date-input" id="month-button-input" autocomplete="off" minlength="2" maxlength="2" min="0" max="12">       
           <div class="dropdown" id="month-dropdown">                 
-            <a href="#about">About</a>
-            <a href="#base">Base</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>      
+                 
           </div>
         </div>
 
         <div id="input-container-year" class="input-container">    
           <label for="year-button-input" class="date-label" id="year-label">YEAR</label>             
-          <input type="number" placeholder="YYYY" class="date-input" id="year-button-input" autocomplete="off" minlength="4" maxlength="4">   
-          <div class="dropdown" id="year-dropdown">    
-            <a href="#about">About</a>
-            <a href="#base">Base</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>      
+          <input type="number" placeholder="YYYY" class="date-input" id="year-button-input" autocomplete="off" minlength="4" maxlength="4" min="0" max="3000">   
+          <div class="dropdown" id="year-dropdown">                    
+                    
           </div>
         </div>
 
@@ -52,7 +43,7 @@
 
       <hr>
       <div class="image-container">
-        <img class="arrow-image" src="../assets/images/icon-arrow.svg" alt="Arrow Image" height="25px" width="25px" />
+        <button class="arrow-image-button" id="submitButton" alt="Arrow Button"></button>
       </div>
 
       <div class="output-content">      

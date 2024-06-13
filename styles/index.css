@@ -86,36 +86,57 @@ body {
     font-weight: var(--fw-extra-bold);
     font-family: var(--ff-Poppins);        
   }
-.dropdown a{
+.dropdown option{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;   
     text-decoration: none;
-    overflow-y: auto;    /*will need to add scroll for over flow of text added by js */
-    
+    overflow-y: auto;    /*will need to add scroll for over flow of text added by js */ 
 }
 .dropdown{
-    margin-top: .5em;
+    margin-top: .2em;
     width: 6.2em;
     background-color: var(--neutral-clr-off-white);
     position: absolute;
     z-index: 1;
     text-align: center;
+    border: 1px solid var(--neutral-clr-light-grey);
+    border-radius: 0 0 8px 8px;
 }
-.day-toggle, .month-toggle, .year-toggle{
+.hidden {
     display: none;
 }
+#day-dropdown, #month-dropdown, #year-dropdown{
+    height: 7em;
+    overflow-y: auto;
+}
+#day-dropdown option, #month-dropdown option, #year-dropdown option{
+    font-family: var(--ff-Poppins);
+    font-size: 16px;
+    font-weight: var(--fw-bold);
+    color: var(--neutral-clr-off-black);
+    border: 1px solid var(--neutral-clr-light-grey);
+    padding: .5em 0 .5em 0;
+}
+
 .image-container{
+    margin-top: 7.5em;
+    position: absolute;
+}
+.image-container button{
     background-color: var(--primary-clr-purple);
     border-radius: 50%;
+    background-image: url("../assets/images/icon-arrow.svg");
+    background-repeat: no-repeat;
     width: 60px;
     height: 60px;
-    display: flex;
-    align-items: center;
-    margin-top: 8em;
-    justify-content: center;
-    position: absolute;
+    background-position: 50%;
+    background-size: 50%;
+
+}
+.image-container button:active{
+    background-color: var(--neutral-clr-off-black);
 }
 hr{
     margin-top: 4em;
