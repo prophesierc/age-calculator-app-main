@@ -92,7 +92,7 @@ body {
     justify-content: center;
     align-items: center;   
     text-decoration: none;
-    overflow-y: auto;    /*will need to add scroll for over flow of text added by js */ 
+    overflow-y: auto;    
 }
 .dropdown{
     margin-top: .2em;
@@ -119,7 +119,6 @@ body {
     border: 1px solid var(--neutral-clr-light-grey);
     padding: .5em 0 .5em 0;
 }
-
 .image-container{
     margin-top: 7.5em;
     position: absolute;
@@ -151,10 +150,10 @@ hr{
     line-height: 1.2em;
     display: flex;
     flex-direction: column;
-    margin: 1.5em 1.8em 0 0;
+    margin: 1.8em 1.5em 0 0;
 }
 
-#output-years::before{
+/* #output-years::before{
     content: '38';
     color: var(--primary-clr-purple);
 }
@@ -165,7 +164,7 @@ hr{
 #output-days::before{
     content: '26';
     color: var(--primary-clr-purple);
-}
+} */
 
 .attribution { 
     font-size: 11px; 

@@ -12,12 +12,11 @@
   <div class="content-container">
 
     <div class="calendar-container">
-
       <div class="row">   
 
         <div id="input-container-day" class="input-container">    
           <label for="day-button-input" class="date-label" id="day-label">DAY</label>                          
-          <input type="number" placeholder="DD" class="date-input" id="day-button-input" autocomplete="off" minlength="2" maxlength="2" min="0" max="31">     
+          <input type="number" placeholder="DD" class="date-input" id="day-button-input" autocomplete="off" minlength="2" maxlength="2" min="1" max="31">     
           <div class="dropdown" id="day-dropdown">      
             
           </div>
@@ -33,7 +32,7 @@
 
         <div id="input-container-year" class="input-container">    
           <label for="year-button-input" class="date-label" id="year-label">YEAR</label>             
-          <input type="number" placeholder="YYYY" class="date-input" id="year-button-input" autocomplete="off" minlength="4" maxlength="4" min="0" max="3000">   
+          <input type="number" placeholder="MM" class="date-input" id="year-button-input" autocomplete="off" minlength="2" maxlength="2" min="0" max="12" >       
           <div class="dropdown" id="year-dropdown">                    
                     
           </div>
@@ -48,9 +47,9 @@
 
       <div class="output-content">      
 
-        <p id="output-years"> years </p>
-        <p id="output-months"> months </p>        
-        <p id="output-days"> days </p>
+        <p id="output-years"></p>
+        <p id="output-months"></p>        
+        <p id="output-days"></p>
 
       </div>
 
