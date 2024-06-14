@@ -109,7 +109,7 @@ body {
 }
 #day-dropdown, #month-dropdown, #year-dropdown{
     height: 7em;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 #day-dropdown option, #month-dropdown option, #year-dropdown option{
     font-family: var(--ff-Poppins);
@@ -150,22 +150,33 @@ hr{
     line-height: 1.2em;
     display: flex;
     flex-direction: column;
-    margin: 1.8em 1.5em 0 0;
+    margin: 1.8em 1em 0 0;
 }
 
-/* #output-years::before{
-    content: '38';
+.output-content div{
+    display: inline-flex;
+}
+#output-years-before{
     color: var(--primary-clr-purple);
 }
-#output-months::before{
-    content: '3';
+#output-years-before::after{
+    content: ' years';
+    color: var(--neutral-clr-off-black);
+}
+#output-months-before{
     color: var(--primary-clr-purple);
 }
-#output-days::before{
-    content: '26';
+#output-months-before::after{
+    content: ' months';
+    color: var(--neutral-clr-off-black);
+}
+#output-days-before{
     color: var(--primary-clr-purple);
-} */
-
+}
+#output-days-before::after{
+    content: ' days';
+    color: var(--neutral-clr-off-black);
+}
 .attribution { 
     font-size: 11px; 
     text-align: center; 
