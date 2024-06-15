@@ -16,6 +16,7 @@ class Calendar
         document.getElementById("year-dropdown").classList.add("hidden");
 
         this.submitButton = document.querySelector('button');
+        this.errorStateIsActive = false
         this.init();       
     }
 
@@ -59,7 +60,7 @@ class Calendar
                 let key = event.key
                 if (key === 'Enter')
                 {
-                    this.displayOutput();
+                    this.validator();
                 };
             }
 
@@ -87,18 +88,17 @@ class Calendar
 
     validator()
     {
+        this.errorStateIsActive = false;
         this.inputArray.forEach((input, index) => 
-        {   
-            //MM / DD need to account for length > 2 to account for not adding 0
-            // need to fix logic for || to enforce either required or invalid warning text
-            input.value === '' 
-            ? this.requiredText[index].style.display = 'flex' : this.requiredText[index].style.display = 'none' // required text
-        
-            input.placeholder === 'YYYY' && input.value.length < 4 ? this.invalidText[index].style.display = 'flex' :  this.invalidText[index].style.display = 'none' // YYYY invalid text
-            
-            input.placeholder === 'DD' || input.placeholder === 'MM' && input.value.length < 2 
-            ? this.invalidText[index].style.display = 'flex' : this.requiredText[index].style.display = 'none'; // MM / DD invalid text
-            
+        {
+            (input.value === '' )
+                ? (this.requiredText[index].style.display = 'flex', this.invalidText[index].style.display = 'none', this.errorStateIsActive = true)
+                : (input.placeholder === 'YYYY' && input.value.length < 4) 
+                || (input.value === '0') 
+                || (input.placeholder === 'MM' && input.value > parseInt('12') 
+                || (input.placeholder === 'DD' && input.value > parseInt('31')))
+                    ? (this.requiredText[index].style.display = 'none', this.invalidText[index].style.display = 'flex', this.errorStateIsActive = true)
+                    : (this.requiredText[index].style.display = 'none', this.invalidText[index].style.display = 'none');
         });
     }
 
@@ -107,7 +107,10 @@ class Calendar
         this.submitButton.addEventListener('click', () => 
         {
             this.validator();
-            this.displayOutput();
+            if (!this.errorStateIsActive)
+            {
+                this.displayOutput();
+            }
         });
     }
 
@@ -120,4 +123,4 @@ class Calendar
     }
 }
 
-let calendar = new Calendar();
+const calendar = new Calendar();

@@ -91,6 +91,9 @@ body {
     font-weight: var(--fw-extra-bold);
     font-family: var(--ff-Poppins);        
   }
+.date-input:active{
+    border: 1px solid var(--primary-clr-purple);
+}
 .dropdown option{
     display: flex;
     flex-direction: column;
