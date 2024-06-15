@@ -4,117 +4,118 @@ class Calendar
     {
         this.inputArray = Array.from(document.querySelectorAll('input[type=number]'));
         this.toggleArray = Array.from(document.querySelectorAll('[class^="dropdown"]'));
+        this.requiredText = Array.from(document.querySelectorAll('.empty-field'));
+        this.invalidText = Array.from(document.querySelectorAll('.invalid-field'));
+        this.outputBeforeContent = Array.from(document.querySelectorAll('[id*="before"]'));
 
+        this.date = new Date();
+        this.now = Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate());
+        
         document.getElementById("day-dropdown").classList.add("hidden");
         document.getElementById("month-dropdown").classList.add("hidden");
         document.getElementById("year-dropdown").classList.add("hidden");
-        
-        this.outputBeforeContent = Array.from(document.querySelectorAll('[id*="before"]'));
-             
 
         this.submitButton = document.querySelector('button');
-        this.dateTime();
-        this.init();
+        this.init();       
     }
 
-    dateTime() 
-    {
-        // set default of 31 days per month, then change based on selected month & year on submit
-        this.date = new Date();
-        this.year = this.date.getFullYear();
-        this.month = this.date.getMonth() + 1;
-        this.now = new Date(this.year, this.month, 0);
-        this.daysThisMonth = this.now.getDate();
-    }
 
     dropdown(id, start, end) 
     {
         let dropdownValue = document.getElementById(id);
+        let inputId = id.replace('dropdown', 'button-input');
 
-        for (let i = start; i <= end; i++) 
+        for (let i = start; i <= end; i++) //iterates dropdow fields
         {            
             let option = document.createElement("option");
             option.value = parseInt(i);
             option.textContent = parseInt(i);
             dropdownValue.appendChild(option);
 
-            option.addEventListener('click', () => 
+            option.addEventListener('click', () => // onclick dropdown to map value to textfield
             {
-                let inputId = id.replace('dropdown', 'button-input');
                 document.getElementById(inputId).value = parseInt(i);
                 dropdownValue.classList.add("hidden");
             });
         }
 
         this.inputArray.forEach((input, index) => 
-        {
+        {   
             let toggleItem = this.toggleArray[index].classList;
 
-            input.onclick = () => 
+            input.onclick = () => // onclick text field to open dropdown
             {
                 toggleItem.toggle("hidden");
             }
 
-            input.onblur = async () =>
+            input.onblur = async () => // removes dropdown onblur
             {                
-                await new Promise(resolve => setTimeout(resolve, 10));
+                await new Promise(resolve => setTimeout(resolve, 100));
                 toggleItem.contains("hidden") ? null : toggleItem.add("hidden");                
             }
+            
+            input.onkeydown = (event) =>
+            {
+                let key = event.key
+                if (key === 'Enter')
+                {
+                    this.displayOutput();
+                };
+            }
+
+            input.oninput = () => 
+            {
+                input.placeholder === 'YYYY' ? input.value = input.value.trim().slice(0, 4) : input.value = input.value.trim().slice(0, 2)
+            };
         });
-    }
-    displayError()
-    {
-        console.log('errr test');
     }
 
     displayOutput()
     {
-        // (wip)
-        this.outputBeforeContent[2].textContent = this.inputArray[2].value //day
-        this.outputBeforeContent[1].textContent = this.inputArray[1].value; //months
-        this.outputBeforeContent[0].textContent = this.inputArray[0].value; //years
+        this.outputDate = 
+        new Date(
+            this.inputArray[2].value, this.inputArray[1].value - 1, this.inputArray[0].value
+        ); 
+        this.diffInYears = Math.abs(this.outputDate.getFullYear() - this.date.getFullYear());
+        this.diffInMonths = Math.abs(this.outputDate.getMonth() - this.date.getMonth());
+        this.diffInDays = Math.abs(this.outputDate.getDate() - this.date.getDate());
 
-        this.outputDate = new Date(this.outputBeforeContent[2].textContent, this.outputBeforeContent[1].textContent - 1, this.outputBeforeContent[0].textContent); // datetime rekating input values into real dates
-        
-        this.math = Math.abs(this.outputDate - new Date())
-        this.dateTimeDebugger()
+        this.outputBeforeContent[0].textContent = this.diffInYears; 
+        this.outputBeforeContent[1].textContent = this.diffInMonths; 
+        this.outputBeforeContent[2].textContent = this.diffInDays; 
     }
 
-    dateTimeDebugger()
+    validator()
     {
-        this.day = parseInt(this.outputBeforeContent[2].textContent, 10);
-        this.month = parseInt(this.outputBeforeContent[1].textContent, 10) - 1;
-        this.year = parseInt(this.outputBeforeContent[0].textContent, 10);
-        this.outputDate = new Date(this.year, this.month, this.day);
-        this.math = Math.abs(this.outputDate - new Date());
-        console.log(this.outputDate);
-        console.log(this.math)
-        console.log('parseint Day:', this.day); // shows year insstead
-        console.log('parseint Month:', this.month); // shows day instead
-        console.log('parseint Year:', this.year); // shows month instead
-        console.log('Date:', this.outputDate);
-        console.log('day:', this.outputBeforeContent[2].textContent); //y
-        console.log('month:', this.outputBeforeContent[1].textContent); //m
-        console.log('year:', this.outputBeforeContent[0].textContent); //d
-
+        this.inputArray.forEach((input, index) => 
+        {   
+            //MM / DD need to account for length > 2 to account for not adding 0
+            // need to fix logic for || to enforce either required or invalid warning text
+            input.value === '' 
+            ? this.requiredText[index].style.display = 'flex' : this.requiredText[index].style.display = 'none' // required text
         
+            input.placeholder === 'YYYY' && input.value.length < 4 ? this.invalidText[index].style.display = 'flex' :  this.invalidText[index].style.display = 'none' // YYYY invalid text
+            
+            input.placeholder === 'DD' || input.placeholder === 'MM' && input.value.length < 2 
+            ? this.invalidText[index].style.display = 'flex' : this.requiredText[index].style.display = 'none'; // MM / DD invalid text
+            
+        });
     }
 
     submit() 
     {
-        this.submitButton.addEventListener('click', async () => 
+        this.submitButton.addEventListener('click', () => 
         {
-            
-            
+            this.validator();
             this.displayOutput();
         });
     }
 
     init() 
     {
-        this.dropdown('day-dropdown', 1, this.daysThisMonth);
+        this.dropdown('day-dropdown', 1, 31);
         this.dropdown('month-dropdown', 1, 12);
-        this.dropdown('year-dropdown', this.year - 50, this.year + 50);
+        this.dropdown('year-dropdown', 1950, 2050);
         this.submit();
     }
 }
