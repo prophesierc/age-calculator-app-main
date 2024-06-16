@@ -18,6 +18,10 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
           chmod 600 key.pem
 
+      - name: Adjust permissions on target directory
+        run: |
+          ssh -i key.pem -o StrictHostKeyChecking=no deploy@prophesierc.site "sudo chown -R deploy:deploy /var/www/prophesierc.site/prophesierc/age-calculator-app-main && sudo chmod -R 755 /var/www/prophesierc.site/prophesierc/age-calculator-app-main"
+
       - name: Clean up target directory
         run: |
           ssh -i key.pem -o StrictHostKeyChecking=no deploy@prophesierc.site "rm -rf /var/www/prophesierc.site/prophesierc/age-calculator-app-main/*"
