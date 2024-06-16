@@ -200,8 +200,10 @@ hr{
 }
 
 .attribution { 
+    position: relative;
     font-size: 11px; 
     text-align: center; 
+    
 }
 .attribution a { 
     color: hsl(228, 45%, 44%); 
@@ -253,6 +255,5 @@ hr{
         position: absolute;
         top: 7em;
         left: -4.5em;
-
     }
 }
