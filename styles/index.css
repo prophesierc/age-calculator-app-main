@@ -166,44 +166,39 @@ hr{
 }
 .output-content{
     font-family: var(--ff-Poppins-Extra-Bold-Italic);
-    font-size: calc(4rem / 1.25);
     font-weight: var(--fw-extra-bold);
-    line-height: 1.2em;
     display: flex;
     flex-direction: column;
-    margin: 1em -.1em 0 -10vw;
+    
 }
 
 .output-content div{
     display: inline-flex;
 }
-#output-years-before{
+#output-years-before, #output-months-before, #output-days-before{
     color: var(--primary-clr-purple);
+    font-size: calc(4rem / 1.25);
+    margin: 0 -1em 0 -10vw;
+    line-height: 1.2em;
+
 }
 #output-years-before::after{
     content: ' years';
     color: var(--neutral-clr-off-black);
 }
-#output-months-before{
-    color: var(--primary-clr-purple);
-}
 #output-months-before::after{
     content: ' months';
     color: var(--neutral-clr-off-black);
-}
-#output-days-before{
-    color: var(--primary-clr-purple);
 }
 #output-days-before::after{
     content: ' days';
     color: var(--neutral-clr-off-black);
 }
-
 .attribution { 
     position: relative;
     font-size: 11px; 
     text-align: center; 
-    
+ 
 }
 .attribution a { 
     color: hsl(228, 45%, 44%); 
@@ -213,13 +208,13 @@ hr{
     body{
         height: 100vh;
     }
-    .output-content{
+    #output-years-before, #output-months-before, #output-days-before{
         font-size: calc(5.4rem / 1.25);
         margin: -.2em -.5em 0 -10vw;
     }
 }
 @media only screen and (min-width: 600px) {
-    .output-content{
+    #output-years-before, #output-months-before, #output-days-before{
         margin: -.1em -.1em 0 -15vw;
     }
 }
@@ -229,11 +224,10 @@ hr{
         max-width: 700px;
         border-radius: 1em 1em 7em 1em;
     }
-    .output-content{
-        margin: 0 1.7em 0 0;
+    #output-years-before, #output-months-before, #output-days-before{
+        margin: 0 1.8em 0 0;
         font-size: 60px;
         font-size: calc(6rem / 1.25);
-        margin: -.3em .5em 0 -10vw;
     }
     hr{
         max-width: 600px;
