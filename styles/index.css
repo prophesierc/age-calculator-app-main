@@ -162,6 +162,9 @@ hr{
     display: none;  
     position: absolute; 
 }
+select{
+    display: none;
+}
 .input-container {
     position: relative; 
 }
