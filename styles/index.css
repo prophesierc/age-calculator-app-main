@@ -26,7 +26,7 @@
     --ff-Poppins: 'Poppins';
     --ff-Poppins-Extra-Bold-Italic: 'Poppins Extra Bold Italics';
     --ff-Poppins-Italic: 'Poppins Italics';
-    --fs-inputs: 44px;
+    --fs-inputs: 18px;
     --fw-regular: 400;
     --fw-bold: 700;
     --fw-extra-bold: 800;
@@ -48,7 +48,7 @@ body {
 .content-container { 
     background-color: var(--neutral-clr-White);   
     font-family: var(--ff-Poppins);
-    height: 70vh;
+    height: 65vh;
     width: 90vw;    
     border-radius: 1em 1em 5em 1em;
     display: flex;
@@ -71,8 +71,7 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-.date-label {    
+label {    
     font-weight: var(--fw-bold);
     font-size: 12px;
     letter-spacing: 2px;
@@ -87,12 +86,14 @@ body {
     border-radius: 8px;
     width: 5em;    
     height: 3em;
-    font-size: 20px;
+    font-size: var(--fs-inputs);
     font-weight: var(--fw-extra-bold);
     font-family: var(--ff-Poppins);        
-  }
-.date-input:active{
-    border: 1px solid var(--primary-clr-purple);
+    outline: 0;
+}
+.date-input:focus{
+    border: 2px solid var(--primary-clr-purple);
+    caret-color: var(--primary-clr-purple);
 }
 .dropdown option{
     display: flex;
@@ -102,7 +103,6 @@ body {
     text-decoration: none;
     overflow-y: auto;    
 }
-
 .dropdown option:hover{
     background-color: var(--neutral-clr-light-grey);
 }
@@ -143,6 +143,7 @@ body {
     height: 60px;
     background-position: 50%;
     background-size: 50%;
+    border: none;
 }
 .image-container button:active{
     background-color: var(--neutral-clr-off-black);
@@ -165,12 +166,12 @@ hr{
 }
 .output-content{
     font-family: var(--ff-Poppins-Extra-Bold-Italic);
-    font-size: var(--fs-inputs);
+    font-size: calc(4rem / 1.25);
     font-weight: var(--fw-extra-bold);
     line-height: 1.2em;
     display: flex;
     flex-direction: column;
-    margin: .8em 1em 0 0;
+    margin: 1em -.1em 0 -10vw;
 }
 
 .output-content div{
@@ -204,4 +205,54 @@ hr{
 }
 .attribution a { 
     color: hsl(228, 45%, 44%); 
+}
+
+@media only screen and (min-width: 450px) {
+    body{
+        height: 100vh;
+    }
+    .output-content{
+        font-size: calc(5.4rem / 1.25);
+        margin: -.2em -.5em 0 -10vw;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .output-content{
+        margin: -.1em -.1em 0 -15vw;
+    }
+}
+@media only screen and (min-width: 800px) {
+    .content-container { 
+        max-height: 60vh;
+        max-width: 700px;
+        border-radius: 1em 1em 7em 1em;
+    }
+    .output-content{
+        margin: 0 1.7em 0 0;
+        font-size: 60px;
+        font-size: calc(6rem / 1.25);
+        margin: -.3em .5em 0 -10vw;
+    }
+    hr{
+        max-width: 600px;
+    }
+    .image-container button{
+        margin: 0 0 0 550px;
+    }
+    .date-input { 
+        margin: 0 1em -1.5em 0;
+        width: 7em;
+        transform: translate(-3em);
+    }
+    label{
+        margin: 0 0 0 -4em;
+    }
+    .invalid-field, 
+    .empty-field {
+        display: none;  
+        position: absolute;
+        top: 7em;
+        left: -4.5em;
+
+    }
 }

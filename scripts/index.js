@@ -1,9 +1,28 @@
+/*
+  IPO Chart
+  Name: Calendar
+  Date: 
+
+  Input:
+    - Inputs Day, Month, Year 
+
+  Process:
+    - Takes absolute value of inputs dates - todays dates, adds validator to ensure calendar formatting
+
+  Output:
+    - Absolute values of Input - Today
+
+  Author: Prophesierc
+  Modified: 6/15/2024
+*/
+
 class Calendar 
 {
     constructor() 
     {
         this.inputArray = Array.from(document.querySelectorAll('input[type=number]'));
         this.toggleArray = Array.from(document.querySelectorAll('[class^="dropdown"]'));
+        this.labelArray = Array.from(document.getElementsByTagName('label'));
         this.requiredText = Array.from(document.querySelectorAll('.empty-field'));
         this.invalidText = Array.from(document.querySelectorAll('.invalid-field'));
         this.outputBeforeContent = Array.from(document.querySelectorAll('[id*="before"]'));
@@ -17,9 +36,8 @@ class Calendar
 
         this.submitButton = document.querySelector('button');
         this.errorStateIsActive = false
-        this.init();       
+        this.init();     
     }
-
 
     dropdown(id, start, end) 
     {
@@ -60,51 +78,84 @@ class Calendar
                 let key = event.key
                 if (key === 'Enter')
                 {
-                    this.validator();
+                    toggleItem.contains("hidden") ? null : toggleItem.add("hidden");                
+                    this.submitButton.click();
                 };
             }
 
             input.oninput = () => 
             {
-                input.placeholder === 'YYYY' ? input.value = input.value.trim().slice(0, 4) : input.value = input.value.trim().slice(0, 2)
+                input.placeholder === 'YYYY' 
+                ? input.value = input.value.trim().slice(0, 4) 
+                : input.value = input.value.trim().slice(0, 2)
             };
         });
     }
 
     displayOutput()
     {
-        this.outputDate = 
-        new Date(
-            this.inputArray[2].value, this.inputArray[1].value - 1, this.inputArray[0].value
-        ); 
-        this.diffInYears = Math.abs(this.outputDate.getFullYear() - this.date.getFullYear());
-        this.diffInMonths = Math.abs(this.outputDate.getMonth() - this.date.getMonth());
-        this.diffInDays = Math.abs(this.outputDate.getDate() - this.date.getDate());
+        let diffInYears = Math.abs(this.outputDate.getFullYear() - this.date.getFullYear());
+        let diffInMonths = Math.abs(this.outputDate.getMonth() - this.date.getMonth());
+        let diffInDays = Math.abs(this.outputDate.getDate() - this.date.getDate());
 
-        this.outputBeforeContent[0].textContent = this.diffInYears; 
-        this.outputBeforeContent[1].textContent = this.diffInMonths; 
-        this.outputBeforeContent[2].textContent = this.diffInDays; 
+        this.outputBeforeContent[0].textContent = diffInYears;
+        this.outputBeforeContent[1].textContent = diffInMonths;
+        this.outputBeforeContent[2].textContent = diffInDays;
     }
 
-    validator()
+    validator() 
     {
+        this.outputDate = new Date
+        (
+            this.inputArray[2].value,
+            this.inputArray[1].value - 1,
+            this.inputArray[0].value
+        );
+    
         this.errorStateIsActive = false;
         this.inputArray.forEach((input, index) => 
-        {
-            (input.value === '' )
-                ? (this.requiredText[index].style.display = 'flex', this.invalidText[index].style.display = 'none', this.errorStateIsActive = true)
-                : (input.placeholder === 'YYYY' && input.value.length < 4) 
-                || (input.value === '0') 
-                || (input.placeholder === 'MM' && input.value > parseInt('12') 
-                || (input.placeholder === 'DD' && input.value > parseInt('31')))
-                    ? (this.requiredText[index].style.display = 'none', this.invalidText[index].style.display = 'flex', this.errorStateIsActive = true)
-                    : (this.requiredText[index].style.display = 'none', this.invalidText[index].style.display = 'none');
+        {    
+            let labelErrorColor = () => {
+                this.labelArray[index].style.color = 'hsl(0, 100%, 67%)';
+                input.style.border = '1px solid hsl(0, 100%, 67%)';
+            };
+    
+            let labelColor = () => {
+                this.labelArray[index].style.color = 'hsl(0, 1%, 44%)';
+                input.style.border = '1px solid hsl(0, 0%, 86%)';
+            };
+    
+            let isError = 
+            (
+                input.value === '' 
+                || input.placeholder === 'YYYY' && input.value.length < 4 
+                || input.placeholder === 'YYYY' && input.value > this.date.getFullYear()
+                || input.value === '0' 
+                || input.placeholder === 'MM' && input.value > parseInt('12') 
+                || input.placeholder === 'DD' && input.value > parseInt('31') 
+                || Math.abs(this.outputDate.getDate() - this.inputArray[0].value) !== 0
+            );
+    
+            (input.value === '')
+                ? (this.requiredText[index].style.display = 'flex', 
+                    this.invalidText[index].style.display = 'none', 
+                    labelErrorColor(),
+                    this.errorStateIsActive = true)
+                : (isError)
+                    ? (this.requiredText[index].style.display = 'none', 
+                        this.invalidText[0].style.display = 'flex', 
+                        labelErrorColor(),
+                        this.errorStateIsActive = true)
+                    : (this.requiredText[index].style.display = 'none', 
+                        this.invalidText[index].style.display = 'none',
+                        labelColor());
+                    // to hard to read, but i worked hard on it so it stays
         });
     }
 
     submit() 
     {
-        this.submitButton.addEventListener('click', () => 
+        this.submitButton.addEventListener('click', async () => 
         {
             this.validator();
             if (!this.errorStateIsActive)
@@ -118,9 +169,8 @@ class Calendar
     {
         this.dropdown('day-dropdown', 1, 31);
         this.dropdown('month-dropdown', 1, 12);
-        this.dropdown('year-dropdown', 1950, 2050);
+        this.dropdown('year-dropdown', 1900, this.date.getFullYear());
         this.submit();
     }
 }
-
 const calendar = new Calendar();
