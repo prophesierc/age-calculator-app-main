@@ -43,6 +43,7 @@ class Calendar
     {
         let dropdownValue = document.getElementById(id);
         let inputId = id.replace('dropdown', 'button-input');
+        
 
         for (let i = start; i <= end; i++) //iterates dropdow fields
         {            
@@ -114,42 +115,39 @@ class Calendar
     
         this.errorStateIsActive = false;
         this.inputArray.forEach((input, index) => 
-        {    
-            let labelErrorColor = () => {
+        {
+            let labelErrorColor = () => 
+            {
                 this.labelArray[index].style.color = 'hsl(0, 100%, 67%)';
                 input.style.border = '1px solid hsl(0, 100%, 67%)';
             };
     
-            let labelColor = () => {
+            let labelColor = () => 
+            {
                 this.labelArray[index].style.color = 'hsl(0, 1%, 44%)';
                 input.style.border = '1px solid hsl(0, 0%, 86%)';
             };
     
-            let isError = 
-            (
-                input.value === '' 
-                || input.placeholder === 'YYYY' && input.value.length < 4 
-                || input.placeholder === 'YYYY' && input.value > this.date.getFullYear()
-                || input.value === '0' 
-                || input.placeholder === 'MM' && input.value > parseInt('12') 
-                || input.placeholder === 'DD' && input.value > parseInt('31') 
-                || Math.abs(this.outputDate.getDate() - this.inputArray[0].value) !== 0
-            );
+            let isEmpty = input.value === '';
+            let isInvalid =
+            (input.placeholder === 'YYYY' && (input.value.length < 4 
+                || input.value > this.date.getFullYear())) 
+                || (input.placeholder === 'MM' && (input.value > 12 
+                || input.value < 1)) 
+                || (input.placeholder === 'DD' && (input.value > 31 
+                || input.value < 1));
     
-            (input.value === '')
-                ? (this.requiredText[index].style.display = 'flex', 
-                    this.invalidText[index].style.display = 'none', 
-                    labelErrorColor(),
-                    this.errorStateIsActive = true)
-                : (isError)
-                    ? (this.requiredText[index].style.display = 'none', 
-                        this.invalidText[0].style.display = 'flex', 
-                        labelErrorColor(),
-                        this.errorStateIsActive = true)
-                    : (this.requiredText[index].style.display = 'none', 
-                        this.invalidText[index].style.display = 'none',
-                        labelColor());
-                    // to hard to read, but i worked hard on it so it stays
+            this.requiredText[index].style.display = isEmpty 
+            ? (this.invalidText[index].style.display = 'none', 'flex') : 'none';
+
+            this.invalidText[index].style.display = isInvalid 
+            ? (this.requiredText[index].style.display = 'none', 'flex') : 'none';
+    
+            isEmpty || isInvalid 
+            ? labelErrorColor() : labelColor();
+    
+            this.errorStateIsActive = isEmpty || isInvalid 
+            ? true : this.errorStateIsActive;
         });
     }
 
