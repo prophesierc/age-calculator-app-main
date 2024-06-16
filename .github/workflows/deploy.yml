@@ -13,8 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Prepare SSH Key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+
       - name: Clean up target directory
-        run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no deploy@prophesierc.site "rm -rf /var/www/prophesierc.site/prophesierc/age-calculator-app-main/*"
+        run: |
+          ssh -i key.pem -o StrictHostKeyChecking=no deploy@prophesierc.site "rm -rf /var/www/prophesierc.site/prophesierc/age-calculator-app-main/*"
 
       - name: Copy files to server
         uses: appleboy/scp-action@master
@@ -29,4 +35,8 @@ jobs:
           overwrite: true
 
       - name: Set permissions
-        run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no deploy@prophesierc.site "sudo chown -R deploy:deploy /var/www/prophesierc.site/prophesierc/age-calculator-app-main && sudo chmod -R 755 /var/www/prophesierc.site/prophesierc/age-calculator-app-main"
+        run: |
+          ssh -i key.pem -o StrictHostKeyChecking=no deploy@prophesierc.site "sudo chown -R deploy:deploy /var/www/prophesierc.site/prophesierc/age-calculator-app-main && sudo chmod -R 755 /var/www/prophesierc.site/prophesierc/age-calculator-app-main"
+
+      - name: Clean up SSH Key
+        run: rm key.pem
